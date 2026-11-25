@@ -196,12 +196,76 @@ body.light .cv-a{fill:rgba(124,58,237,.18)}body.light .cv-c{fill:rgba(37,99,235,
 .aig{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 .aig .card h3{font-size:24px;margin-bottom:6px}
 @media(max-width:800px){.aig{grid-template-columns:1fr}.aiintro{font-size:16px}}
+/* about layout: photo beside text, journey strip below */
+.about{grid-template-columns:1.35fr .65fr;align-items:stretch}
+.photo{position:relative;min-height:380px;border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 25px 60px rgba(124,58,237,.14)}
+.photo .me{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;border-radius:0;object-fit:cover;object-position:54% 22%}
+.journey{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;padding:22px 10px}
+.journey .step{padding:6px 24px;border-bottom:0;border-right:1px solid var(--border)}
+.journey .step:last-child{border-right:0}
+@media(max-width:800px){.about{grid-template-columns:1fr}.photo{order:-1;min-height:0;height:380px}.journey{grid-template-columns:repeat(2,1fr);gap:6px 0;margin-top:30px}.journey .step{padding:10px 16px;border-right:0;border-bottom:1px solid var(--border)}.journey .step:nth-last-child(-n+2){border-bottom:0}}
+/* skills accordion */
+.acc{display:grid;gap:14px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.ac:hover,.ac.open{border-color:rgba(139,92,246,.45)}
+.ac.open{box-shadow:0 20px 50px rgba(124,58,237,.12)}
+.ach{width:100%;display:flex;align-items:center;gap:18px;padding:18px 22px;background:transparent;border:0;color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.aci{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:12px}
+.aci svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ac:nth-child(1) .aci{background:rgba(56,189,248,.14);color:#38bdf8}
+.ac:nth-child(2) .aci{background:rgba(52,211,153,.14);color:#34d399}
+.ac:nth-child(3) .aci{background:rgba(167,139,250,.16);color:#a78bfa}
+.ac:nth-child(4) .aci{background:rgba(251,146,60,.15);color:#fb923c}
+.ac:nth-child(5) .aci{background:rgba(244,114,182,.15);color:#f472b6}
+.ac:nth-child(6) .aci{background:rgba(251,191,36,.15);color:#fbbf24}
+.acn{flex:1;font-size:18px;font-weight:600;color:#d8d9e0}
+.acc2{font-size:13.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+.acv{width:20px;height:20px;flex-shrink:0;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+.ac.open .acv{transform:rotate(180deg)}
+.acp{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.ac.open .acp{grid-template-rows:1fr}
+.api{min-height:0;overflow:hidden}
+.api .chips{padding:2px 22px 22px}
+.ach:focus-visible{outline:2px solid #a78bfa;outline-offset:-2px;border-radius:18px}
+@media(max-width:600px){.ach{padding:16px;gap:12px}.acn{font-size:16px}.acc2{font-size:12px}.api .chips{padding:2px 16px 18px}}
+/* floating header + scrollspy + missile */
+html{scroll-padding-top:92px}
+nav{background:transparent;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none;pointer-events:none}
+.nav{pointer-events:auto;border:1px solid transparent;transition:width .4s ease,min-height .4s ease,margin .4s ease,border-radius .4s ease,background .4s ease,padding .4s ease,box-shadow .4s ease,border-color .4s ease}
+nav.scrolled .nav{margin-top:12px;min-height:56px;width:min(1000px,92%);padding:0 12px 0 24px;border-radius:100px;background:rgba(12,14,22,.74);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-color:rgba(255,255,255,.1);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 0 1px rgba(139,92,246,.08);animation:navPop .55s cubic-bezier(.34,1.56,.64,1)}
+@keyframes navPop{from{transform:translateY(-26px) scale(.94);opacity:.4}to{transform:none;opacity:1}}
+.logo{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:800;letter-spacing:-.4px;white-space:nowrap}
+.links{position:relative;gap:2px}
+.links a{padding:8px 15px;border-radius:100px;position:relative;z-index:1}
+.links .cta{margin-left:8px;padding:8px 18px;border-radius:100px}
+.links a.act{color:#fff}
+.ind{position:absolute;top:50%;left:0;width:0;height:36px;transform:translateY(-50%);border-radius:100px;background:rgba(139,92,246,.2);border:1px solid rgba(139,92,246,.45);box-shadow:0 0 18px rgba(139,92,246,.25);opacity:0;pointer-events:none;z-index:0;transition:left .4s cubic-bezier(.65,0,.35,1),width .4s cubic-bezier(.65,0,.35,1),opacity .3s}
+.mm a.act{color:#fff;background:rgba(139,92,246,.14)}
+nav.scrolled .mm{top:78px;left:4%;right:4%;border-radius:18px;border:1px solid rgba(255,255,255,.1);pointer-events:auto}
+.mm{pointer-events:auto}
+.mis{position:relative;width:12px;height:30px;flex-shrink:0;display:inline-block;margin-top:2px}
+.mis svg{position:absolute;left:0;top:0;width:12px;height:30px;overflow:visible}
+.mis:after{content:"";position:absolute;left:50%;top:25px;width:4px;height:0;margin-left:-2px;border-radius:4px;background:linear-gradient(to bottom,rgba(251,191,36,.85),rgba(255,255,255,.3),transparent);opacity:0}
+.mf{transform-box:fill-box;transform-origin:50% 0;opacity:0;transform:scaleY(.3);transition:opacity .2s,transform .2s}
+.mis.rumble .mf{opacity:.85;transform:scaleY(.7)}
+.mis.rumble svg{animation:misShake .1s linear infinite}
+.mis.go{animation:misUp 1.15s cubic-bezier(.5,0,.9,.4) forwards}
+.mis.go .mf{opacity:1;transform:scaleY(1.9);animation:misFlame .08s linear infinite alternate}
+.mis.go:after{animation:misTrail 1.15s ease-out forwards}
+.mis.rld{animation:misIn .6s ease-out both}
+@keyframes misShake{0%{transform:translateX(-.6px)}50%{transform:translateX(.6px)}100%{transform:translateX(-.6px)}}
+@keyframes misUp{0%{transform:translateY(0);opacity:1}10%{transform:translateY(3px);opacity:1}70%{opacity:1}100%{transform:translateY(-170px);opacity:0}}
+@keyframes misFlame{from{transform:scaleY(1.6)}to{transform:scaleY(2.2)}}
+@keyframes misTrail{0%{height:0;opacity:0}12%{height:34px;opacity:.9}70%{height:62px;opacity:.7}100%{height:72px;opacity:0}}
+@keyframes misIn{from{opacity:0;transform:translateY(12px) scale(.7)}to{opacity:1;transform:none}}
+@media(max-width:800px){.ind{display:none}nav.scrolled .nav{padding:0 8px 0 18px}.logo{font-size:18px}}
+@media(prefers-reduced-motion:reduce){nav.scrolled .nav{animation:none}.mis.rumble svg{animation:none}}
 </style>
 </head>
 <body>
 <div class="bgs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grid"></div></div>
-<nav><div class="nav"><a href="#" class="logo">SAI<span>.</span></a>
-<div class="links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#ai">AI</a><a href="#skills">Skills</a><a href="#connect" class="cta">Connect</a>
+<nav><div class="nav"><a href="#" class="logo" aria-label="Sai Alugolu - home">Sai Alugolu<span class="mis" id="mis" aria-hidden="true"><svg viewBox="0 0 12 30"><g class="mf"><path d="M3.8 23 Q6 32 8.2 23Z" fill="#fbbf24"/><path d="M4.9 23 Q6 28.5 7.1 23Z" fill="#fff7ed"/></g><path d="M2 15 L-1.5 23 L2 21Z" fill="#8b5cf6"/><path d="M10 15 L13.5 23 L10 21Z" fill="#8b5cf6"/><path d="M6 0 C8.6 3 10 6.5 10 11 V21 H2 V11 C2 6.5 3.4 3 6 0Z" fill="#e5e7eb"/><rect x="2" y="15" width="8" height="2.2" fill="#8b5cf6"/><circle cx="6" cy="10.5" r="1.7" fill="#38bdf8"/><rect x="3.8" y="21" width="4.4" height="2" rx=".6" fill="#6b7280"/></svg></span></a>
+<div class="links"><span class="ind" id="ind"></span><a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#ai">AI</a><a href="#skills">Skills</a><a href="#connect" class="cta">Connect</a>
 <button class="tg" id="tg" aria-label="Toggle menu" aria-expanded="false"><i></i><i></i><i></i></button></div></div>
 <div class="mm" id="mm"><a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#ai">AI</a><a href="#skills">Skills</a></div></nav>
 
@@ -268,13 +332,13 @@ body.light .cv-a{fill:rgba(124,58,237,.18)}body.light .cv-c{fill:rgba(37,99,235,
 <p>Over time, I became increasingly interested in how products are designed, why users behave the way they do, how features are researched and built, and how the right product reaches the right audience.</p>
 <p>Today, my experience spans Customer Success, product operations, product analytics, PRDs, user stories, SQL, SEO and AEO content strategy, B2B outreach, ICP development, lead generation, and growth experimentation. As a Growth Product Manager, I connect customer insights with product strategy, collaborate across teams, and validate ideas through experimentation.</p>
 </div>
+<div class="photo"><img class="me" src="sai.jpg" width="800" height="800" alt="Sai Alugolu" loading="lazy" onerror="this.style.display='none'"></div></div>
 <div class="journey">
-<img class="me" src="sai.jpg" width="800" height="800" alt="Sai Alugolu" loading="lazy" onerror="this.style.display='none'">
 <div class="step"><span>01</span><h4>Customer Success</h4></div>
 <div class="step"><span>02</span><h4>Product Operations</h4></div>
 <div class="step"><span>03</span><h4>Product Management</h4></div>
 <div class="step"><span>04</span><h4>Growth</h4></div>
-</div></div></div></section>
+</div></div></section>
 
 <section id="experience"><div class="container">
 <p class="label">Experience</p>
@@ -364,13 +428,32 @@ body.light .cv-a{fill:rgba(124,58,237,.18)}body.light .cv-c{fill:rgba(37,99,235,
 <section id="skills"><div class="container">
 <p class="label">Skills</p>
 <h2 class="title">What I work with.</h2>
-<div class="sk"><h4>Analytics &amp; Data</h4><div class="chips"><span class="chip">SQL</span><span class="chip">Excel</span><span class="chip">Event-Level Analysis</span></div></div>
-<div class="sk"><h4>Product Analytics Platforms</h4><div class="chips"><span class="chip">Mixpanel</span><span class="chip">Amplitude</span><span class="chip">Apxor</span><span class="chip">Klaritics</span></div></div>
-<div class="sk"><h4>Product Analytics Methods</h4><div class="chips"><span class="chip">Funnel Analysis</span><span class="chip">Retention Analysis</span><span class="chip">Cohort Analysis</span><span class="chip">User Flows</span><span class="chip">Campaign Analytics</span><span class="chip">Survey Analytics</span><span class="chip">Video Analytics</span></div></div>
-<div class="sk"><h4>Product Metrics &amp; Statistics</h4><div class="chips"><span class="chip">DAU</span><span class="chip">WAU</span><span class="chip">MAU</span><span class="chip">Conversion Rates</span><span class="chip">Retention Rates</span><span class="chip">Stickiness</span><span class="chip">Drop-offs</span><span class="chip">Control Group Comparisons</span></div></div>
-<div class="sk"><h4>Product &amp; Business Analysis</h4><div class="chips"><span class="chip">Product Feature Definition</span><span class="chip">Metric Definition</span><span class="chip">PRDs</span><span class="chip">User Stories</span><span class="chip">Functional Specifications</span><span class="chip">Acceptance Criteria</span><span class="chip">Requirement Gathering</span><span class="chip">Stakeholder Management</span></div></div>
-<div class="sk"><h4>Tools &amp; Growth</h4><div class="chips"><span class="chip">A/B Testing</span><span class="chip">Apxor In-App Campaigns</span><span class="chip">WebEngage</span><span class="chip">Push Notifications</span><span class="chip">Email Campaigns</span><span class="chip">Zoho Email Campaigns</span><span class="chip">Landing Pages</span></div></div>
-</div></section>
+<div class="acc">
+<div class="ac open" data-i="1">
+<button class="ach" aria-expanded="true" aria-controls="acp1"><span class="aci"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="acn">Analytics &amp; Data</span><span class="acc2">3 skills</span><svg class="acv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="acp" id="acp1"><div class="api"><div class="chips"><span class="chip">SQL</span><span class="chip">Excel</span><span class="chip">Event-Level Analysis</span></div></div></div>
+</div>
+<div class="ac" data-i="2">
+<button class="ach" aria-expanded="false" aria-controls="acp2"><span class="aci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="acn">Product Analytics Platforms</span><span class="acc2">4 skills</span><svg class="acv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="acp" id="acp2"><div class="api"><div class="chips"><span class="chip">Mixpanel</span><span class="chip">Amplitude</span><span class="chip">Apxor</span><span class="chip">Klaritics</span></div></div></div>
+</div>
+<div class="ac" data-i="3">
+<button class="ach" aria-expanded="false" aria-controls="acp3"><span class="aci"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg></span><span class="acn">Product Analytics Methods</span><span class="acc2">7 skills</span><svg class="acv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="acp" id="acp3"><div class="api"><div class="chips"><span class="chip">Funnel Analysis</span><span class="chip">Retention Analysis</span><span class="chip">Cohort Analysis</span><span class="chip">User Flows</span><span class="chip">Campaign Analytics</span><span class="chip">Survey Analytics</span><span class="chip">Video Analytics</span></div></div></div>
+</div>
+<div class="ac" data-i="4">
+<button class="ach" aria-expanded="false" aria-controls="acp4"><span class="aci"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span class="acn">Product Metrics &amp; Statistics</span><span class="acc2">8 skills</span><svg class="acv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="acp" id="acp4"><div class="api"><div class="chips"><span class="chip">DAU</span><span class="chip">WAU</span><span class="chip">MAU</span><span class="chip">Conversion Rates</span><span class="chip">Retention Rates</span><span class="chip">Stickiness</span><span class="chip">Drop-offs</span><span class="chip">Control Group Comparisons</span></div></div></div>
+</div>
+<div class="ac" data-i="5">
+<button class="ach" aria-expanded="false" aria-controls="acp5"><span class="aci"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span><span class="acn">Product &amp; Business Analysis</span><span class="acc2">8 skills</span><svg class="acv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="acp" id="acp5"><div class="api"><div class="chips"><span class="chip">Product Feature Definition</span><span class="chip">Metric Definition</span><span class="chip">PRDs</span><span class="chip">User Stories</span><span class="chip">Functional Specifications</span><span class="chip">Acceptance Criteria</span><span class="chip">Requirement Gathering</span><span class="chip">Stakeholder Management</span></div></div></div>
+</div>
+<div class="ac" data-i="6">
+<button class="ach" aria-expanded="false" aria-controls="acp6"><span class="aci"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.6-.6-2.6z"/></svg></span><span class="acn">Tools &amp; Growth</span><span class="acc2">7 skills</span><svg class="acv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="acp" id="acp6"><div class="api"><div class="chips"><span class="chip">A/B Testing</span><span class="chip">Apxor In-App Campaigns</span><span class="chip">WebEngage</span><span class="chip">Push Notifications</span><span class="chip">Email Campaigns</span><span class="chip">Zoho Email Campaigns</span><span class="chip">Landing Pages</span></div></div></div>
+</div>
+</div></div></section>
 
 <section id="connect"><div class="container"><div class="box rv" id="cb"><canvas class="cnet" id="cn" aria-hidden="true"></canvas><div class="cg" id="cg"></div>
 <h2>Let’s Work Together</h2>
@@ -410,6 +493,51 @@ new IntersectionObserver(e=>{run=e[0].isIntersecting;if(run&&!id)loop()}).observ
 const bgs=document.querySelector(".bgs");
 addEventListener("scroll",()=>{if(document.body.classList.contains("light"))return;const q=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);
 bgs.style.background=q<.2?"linear-gradient(135deg,#06070a,#0a0c13,#080711)":q<.45?"linear-gradient(135deg,#080a10,#0d1020,#100a1d)":q<.7?"linear-gradient(135deg,#070b11,#0a1520,#0e0b1c)":"linear-gradient(135deg,#080810,#130b20,#07101b)"},{passive:true});
+
+/* skills accordion */
+document.querySelectorAll(".ach").forEach(b=>b.addEventListener("click",()=>{
+const item=b.parentElement,was=item.classList.contains("open");
+document.querySelectorAll(".ac").forEach(x=>{x.classList.remove("open");x.querySelector(".ach").setAttribute("aria-expanded","false")});
+if(!was){item.classList.add("open");b.setAttribute("aria-expanded","true")}}));
+
+/* header: pop on scroll, section highlight, missile launch on scroll stop */
+(function(){
+const nav=document.querySelector("nav"),mis=document.getElementById("mis"),ind=document.getElementById("ind");
+const links=[...document.querySelectorAll(".links a[href^='#']")].filter(a=>a.getAttribute("href").length>1);
+const mlinks=[...document.querySelectorAll(".mm a")];
+const secs=links.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+const reduce=matchMedia("(prefers-reduced-motion: reduce)");
+let idleT=null,busy=false,lastY=scrollY,cur=undefined;
+function moveInd(a){if(!a||innerWidth<=800){ind.style.opacity=0;return}ind.style.left=a.offsetLeft+"px";ind.style.width=a.offsetWidth+"px";ind.style.opacity=1}
+function spy(force){
+let active=null;const y=innerHeight*.35;
+secs.forEach(s=>{if(s.getBoundingClientRect().top<=y)active=s});
+if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)active=secs[secs.length-1];
+const id=active?"#"+active.id:null;
+if(id===cur&&!force)return;cur=id;
+links.forEach(a=>a.classList.toggle("act",a.getAttribute("href")===id));
+mlinks.forEach(a=>a.classList.toggle("act",a.getAttribute("href")===id));
+moveInd(links.find(a=>a.getAttribute("href")===id));
+}
+function launch(){
+busy=true;lastY=scrollY;mis.classList.remove("rumble");mis.classList.add("go");
+setTimeout(()=>{mis.classList.remove("go");mis.classList.add("rld");setTimeout(()=>{mis.classList.remove("rld");busy=false},650)},1200);
+}
+function onIdle(){
+if(!mis||busy)return;mis.classList.remove("rumble");
+if(reduce.matches||Math.abs(scrollY-lastY)<30)return;
+launch();
+}
+function onScroll(){
+nav.classList.toggle("scrolled",scrollY>40);
+spy();
+if(mis&&!busy&&!reduce.matches)mis.classList.add("rumble");
+clearTimeout(idleT);idleT=setTimeout(onIdle,220);
+}
+addEventListener("scroll",onScroll,{passive:true});
+addEventListener("resize",()=>spy(true));
+nav.classList.toggle("scrolled",scrollY>40);spy(true);
+})();
 </script>
 </body>
 </html>
